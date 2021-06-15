@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include <cmath>
-#include <vector>
 #include <algorithm>
 using namespace std;
 #define SEPARATOR "#<ab@17943918#@>#"
@@ -44,11 +43,8 @@ int max_sum(int a[],int N)
 }
 
 int main() {
-    srand(1234); 
-    int n = 1000;
-	int A[1003];
-	for (int i = 1; i <= n; i++)
-	A[i] = rand()%2000 - 1000;		
+    int n = 5;
+	int A[]={2,5,2,1,9};	
 	cout << max_sum(A, n) << endl;  
     return 0;
 }

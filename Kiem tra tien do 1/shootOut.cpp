@@ -5,7 +5,6 @@ typedef int KeyType;
 typedef struct{
    KeyType Keys[MaxSize];
    int size;
-   int stt[MaxSize];
 }PriorityQueue;
 void swap(KeyType *a,KeyType *b)
 {
@@ -38,33 +37,56 @@ void heap_sort(PriorityQueue *Q)
         max_heap(Q, 0, i);
     }
 }
+int search(PriorityQueue Q,int key,int start, int end)
+{
+	int i=(start+end)/2;
+	while (start!=i and i!=end)
+	{
+		if (Q.Keys[i]>=key) end=i;
+		else start=i;
+		i=(start+end)/2;
+	}
+	for (i=start;i<=end;i++)
+	{
+		if (Q.Keys[i]>=key) break;
+	}
+	return i;
+}
 void shootOut(const char *b5)
 {
-	PriorityQueue pQ,temp;
-	int size,round;
+	PriorityQueue pQ;
+	pQ.size=0;
+	int size,q;
+	//nhap va sapxep suc manh
 	freopen(b5,"r",stdin);
 	scanf("%d",&size);
-	pQ.size=size;
-	for (int i=0;i<size;i++)
+	for (int i=1;i<=size;i++)
 	{
 		scanf("%d",&pQ.Keys[i]);
-		pQ.stt[i]=i;
+		pQ.size++;
 	}
-	scanf("%d",&round);
-	temp.size=round;
-	temp2=pQ.size;
-	for (int i=0;i<round;i++)
+	heap_sort(&pQ);
+	//Tao mang tong suc manh thu i
+	int tong[size];
+	tong[1]=pQ.Keys[1];
+	for (int i=2;i<=size;i++)
 	{
-		scanf("%d",&temp.Keys[i]);
-		temp.stt=temp2++;
+		tong[i]=tong[i-1]+pQ.Keys[i];
 	}
-	for (int i=0;i<round;i++)
-	for (int i=0;i<pQ.size;i++)
+	//Tinh so muc tieu bi nga va tong suc manh theo tung vong
+	scanf("%d",&q);
+	int m=0;
+	for (int i=0;i<q;i++)
 	{
-		if(pQ.Keys[i]!=temp.Keys[i]||pQ.Keys[i]==temp.Keys[i])
+		scanf("%d",&m);
+		int temp=search(pQ,m,1,pQ.size);
+		printf("%d %d\n",temp-1,tong[temp-1]);
 	}
-	
-
+	printf("\n----------------\n");
+	for (int i=1;i<=size;i++)
+	{
+		printf("%d ",tong[i]);
+	}
 }
 int main()
 {

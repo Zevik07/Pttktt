@@ -1,4 +1,4 @@
-// kiem tra tien do
+// kiem tra tien do 1
 #include <stdio.h>
 #define MaxSize 100000
 #define MINVALUE -32768
@@ -124,28 +124,7 @@ void mergeSort(PriorityQueue *Q,int l,int r)
 		merge(Q,l,mid,r);
 	}
 }
-void findkSum (const char* b4){
-	PriorityQueue pQ;
-	freopen(b4,"r",stdin);
-    int n,q;
-    scanf("%d",&n);
-    scanf("%d",&q);
-    pQ.size=n;
-    for(int i=0;i<n;i++){
-        scanf("%d",&pQ.Keys[i]);
-	}
-	//heap_sort(&pQ);
-	int k[q];
-    for (int i=0;i<q;i++)
-    				scanf("%d",&k[i]);
-	for (int i = 0;i<q;i++){
-    int temp=0;
-        for (int j = n-k[i];j<n;j++)
-            temp += pQ.Keys[j];
-    printf("%d\n",temp);
-    					} 
-}
 int main()
 {
-	moduloSort("test.txt");
+
 }

@@ -8,63 +8,51 @@ void swap(double *a,double *b)
 	*a=*b;
 	*b=temp;
 }
-void max_heap(double Q[],double K[],int i, int heap_size) {
-    int largest; 
-    int left = 2*i+1;
-    int right = 2*i+2; 
-    if (left < heap_size && Q[left]/K[left] > Q[i]/K[i])
-        largest = left;
-    else
-        largest = i;
-    if (right < heap_size && Q[right]/K[right] > Q[largest]/K[largest])
-        largest = right;
-    if (largest != i) {
-        swap(&Q[i],&Q[largest]);
-        swap(&K[i],&K[largest]);
-        max_heap(Q,K,largest, heap_size); 
-    }
-}
-void heap_sort(double Q[],double K[],int size)
-{
-	for (int i = size / 2; i >= 0; i--)
-        max_heap(Q,K,i,size); 
-    for(int i = size-1; i>=0 ; i-- )
-    {
-        swap(&Q[0],&Q[i]);
-        swap(&K[0],&K[i]);
-        max_heap(Q,K, 0, i);
-    }
-}
 void Antrom()
 {
 	int n;
-	double Weight,kq;
-	freopen("knapsack04.inp","r",stdin);
+	double kq=0,Weight;
+	//freopen("knapsack04.inp","r",stdin);
 	cin>>n;
 	cin>>Weight;
-	double w[n],p[n];
+	double price[n],w[n],k[n];
+	for (int i=0;i<n;i++)
+	{
+		cin>>price[i];
+	}
 	for (int i=0;i<n;i++)
 	{
 		cin>>w[i];
 	}
 	for (int i=0;i<n;i++)
 	{
-		cin>>p[i];
-	}
-	heap_sort(p,w,n);
-	for (int i = n-1; i >= 0; i--) 
-        { 
-            if (w[i] <= Weight) 
-            { 
-                Weight -= w[i]; 
-                kq += p[i];
-            }
-            if (w[i]>Weight&&Weight>0)
-            {
-            	kq+=(Weight/w[i])*p[i];
-            	break;
+		for (int j=i+1;j<n;j++)
+		{
+			if (price[j]/w[j]>price[i]/w[i])
+			{
+				swap(&price[j],&price[i]);
+				swap(&w[j],&w[i]);
 			}
-        }
+		}
+	}
+	//w[i] la gia tri
+	int i=0;
+	while (Weight>0&&i<n)
+	{
+            if (w[i] <= Weight)
+            { 
+                Weight -= w[i];
+                kq += price[i];
+                //printf("them price1: %f\n",price[i]);
+            }
+            if (price[i]>Weight)
+            {
+            	kq+=(price[i]/w[i])*Weight;
+            	//printf("them price2: %f\n",(price[i]/w[i])*price[i]);
+            	Weight=0;
+			}
+			++i;
+    }
    	printf("%.4f",kq);
 }
 int main()

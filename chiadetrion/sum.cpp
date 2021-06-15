@@ -5,18 +5,18 @@ int maxsumLR(int a[], int l, int r, int LR)
 {
 	int sum=0;
 	int maxsum=-100000;
-//	if (LR==0)
+	if (LR==0)
 		for (int i=r;i>=l;i--)
 			{
 				sum+=a[i];
 				if (sum>maxsum) maxsum=sum;
 			}
-//	if (LR==1) 
-//		for (int i=l;i<=r;i++)
-//			{
-//				sum+=a[i];
-//				if (sum>maxsum) maxsum=sum;
-//			}
+	if (LR==1) 
+		for (int i=l;i<=r;i++)
+			{
+				sum+=a[i];
+				if (sum>maxsum) maxsum=sum;
+			}
 	return maxsum;
 }
 int max_sum_dequi(int a[],int l, int r)
@@ -36,7 +36,7 @@ int max_sum(int a[],int N)
 	return max_sum_dequi(a,1,N); 
 }
 int main(){
-	int n=5;
-	int a[] = {0,-2,3,7,-2,9};
+	int n=8;
+	int a[] = {0,-2,3,7,-2,9,-1,-99};
 	printf("%d ",max_sum(a,n));
 }

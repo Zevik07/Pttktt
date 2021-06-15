@@ -37,6 +37,7 @@ void insertNode(List *p,int u, int v, int w)
 //			free(q);
 //		}
 //}
+
 //Hang uu tien
 typedef struct{
 	int Vertex;

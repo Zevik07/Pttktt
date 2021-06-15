@@ -1,4 +1,3 @@
-#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #define MaxSize 100000
@@ -8,7 +7,7 @@ struct Node
 	int end;
 };
 struct Node* List[MaxSize];
-Node* List L;
+struct Node* L;
 void nhap(List *L,int n)
 {
 	for (int i=1;i<=n;i++)
